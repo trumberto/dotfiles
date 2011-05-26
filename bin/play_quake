@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "echo \"fuhquake-gl.glx 0 0 direct\" > /proc/asound/card0/pcm0p/oss";
+echo "rc games"
+read < /dev/stdin
+fuhquake-gl.glx -fullscreen +cfg_load\ robo +connect 194.109.69.75

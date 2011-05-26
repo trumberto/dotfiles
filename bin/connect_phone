@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# 23.07.2008
+
+sudo /etc/init.d/irda-utils restart
+obexfs -i -- /home/rs/mnt/nokia
+cd /home/rs/mnt/nokia
+ls -al

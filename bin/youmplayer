@@ -1,0 +1,121 @@
+#!/bin/bash
+
+printusage() {
+	echo "Usage: ${0##*/} [-dhp] [-o output] URL1 ..."
+	echo "Play movie from webpage given by URL in mplayer"
+	echo "    -d    donwload movie only"
+	echo "    -h    this help"
+	echo "    -o    output file (default: name of video), only one input will be downloaded"
+	echo "    -p    only print url of movie"
+}
+
+while getopts "dho:p" flag; do
+	case "$flag" in
+	d) download=yes
+		;;
+	h) printusage
+		exit 0
+		;;
+	o) output="$OPTARG"
+		;;
+	p) print=yes
+		;;
+	*) printusage
+		exit 1
+		;;
+	esac
+done
+shift $((OPTIND-1))
+
+for url; do
+	case "$url" in
+	*youtube*)
+		movieurl=`youtube-dl -gdb "$url"`
+		# <meta name="title" content="Pøedvolební speciály Otázek Václava Moravce">
+		moviename=`wget -q -O - "$url" | sed -n '/<meta name="title"/ {
+			s/.*content="\([^"]*\)".*/\1.mp4/p
+			q
+		}' | iconv -c -f UTF-8 -t ASCII//TRANSLIT`
+		;;
+	*ziza.ru*)
+		# skoncit po 1. najdenom vzore
+		movieurl=`wget -q -O - "$url" | sed -n 's%.*\(http://[^\?"]*flv\)".*%\1%p
+			t quit
+			d
+			: quit q
+		'`
+		;;
+	*tube8.com*)
+                movieurl=`wget -q -O - "$url" | sed -n 's/.*var videourl="\(http.*flv\)".*/\1/p 
+			t quit
+			d
+			: quit q
+		'`
+		;;
+	*novinky.cz*)
+		movieurl=`wget -q -O - "$url" | sed -nr 's%.*(http://media.novinky.cz/[^&]*(flv|mp4))&amp.*%\1%p'`
+		;;
+	*navratdoreality.cz*)
+		# mplayer -nokeepaspect http://www.navratdoreality.cz/`wget -q -O - --post-data 'ACTION=check_adult&check=18plus' "$url" |
+		#	sed -n '/addParam/{ s/.*"file=\([^"&]*\)[&"].*/\1/p; s%.*<param name="movie" value="\(http://www.youtube\.[^"]*\)">.*%\1%p }'`
+		html=`wget -q -O - --post-data 'ACTION=check_adult&check=18plus' "$url"`
+		# so.addParam("flashvars","file=content/video/PIXELS.flv&logo.file=http://www.navr...
+		movieurl=http://www.navratdoreality.cz/`sed -n '/addParam/ {
+			s/.*"file=\([^"&]*\)[&"].*/\1/p
+			s%.*<param name="movie" value="\(http://www.youtube\.[^"]*\)">.*%\1%p }' <<<"$html"`
+		# <title>Pixels -  návratdoreality.cz</title>
+		moviename=`sed -n '/<title>/ {
+			s/.*>\(.*\) -  n.*/\1.flv/p
+			q
+		}' <<<"$html" | iconv -c -f UTF-8 -t ASCII//TRANSLIT`			
+		;;
+	*vimeo.com*)
+		tmp="${url#*vimeo.com/}"
+		id="${tmp%%[^0-9]*}"
+
+		xml=`wget -q -O - "http://www.vimeo.com/moogaloop/load/clip:$id"`
+		moviename=`sed -n '/<caption>/{ s/^.*>\([^<]*\)<.*$/\1.mp4/p; q }' <<<"$xml" | iconv -f utf-8 -t iso-8859-2//TRANSLIT`
+		rs=`sed -n 's/^.*<request_signature>\([^<]*\)<.*$/\1/p' <<<"$xml"`
+		rse=`sed -n 's/^.*<request_signature_expires>\([^<]*\)<.*$/\1/p' <<<"$xml"`
+		movieurl="http://www.vimeo.com/moogaloop/play/clip:$id/$rs/$rse/?q=sd"
+		;;
+	*) # stranky vyzadujuce WMP plugin
+		movieurl=`wget -q -O - "$url" |
+			sed -rn '
+				# link na video ulozit do HS
+				\%src="http://[^"]*wmv"% {
+					s%.*(http://[^"]*wmv)".*%\1%
+					H
+				}
+				# ak najde tento text, tak prida @ do HS
+				\%http://www.microsoft.com/Windows/MediaPlayer% {
+					s/.*/@/
+					H
+				}
+				# ak na konci HS obsahuje na zaciatku alebo na konci \n@ tak vypisat ulozeny link
+				$ {
+					g
+					s/^\n@\n//p
+					s/\n(.*)\n@$/\1/p
+				}
+			'`
+		;;
+	esac
+	
+	if [[ "$print" == yes ]]; then
+		echo "$movieurl"
+	else
+		if [[ "$download" == yes ]]; then
+			if [[ -z "$output" ]]; then	# ak nie je zadane meno, tak sa pouzije zo stranky, ak sa neda urcit, tak podla url suboru
+				[[ -z "$moviename" ]] &&
+					moviename="${movieurl##*/}"
+				output="$moviename"
+			fi
+			wget -O "$output" "$movieurl"
+		else
+			if [[ -n "$movieurl" ]]; then
+				mplayer "$movieurl"
+			fi
+		fi
+	fi
+done

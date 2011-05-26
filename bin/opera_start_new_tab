@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# 22.10.2006
+# open url given on cmd line in opera's new tab
+
+# 09.07.2007 - added FvwmCommand as it takes us right to browser
+
+opera -newpage $1
+echo "awful.tag.viewonly(tags[1][2])" | awesome-client
+#FvwmCommand 'GoToPage 3 0'

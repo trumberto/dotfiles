@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# 09.12.2007
+# setup ad-hoc network for windows connection
+
+ifconfig eth2 10.0.0.1 netmask 255.255.255.0
+iwconfig eth2 mode Ad-Hoc
+iwconfig eth2 channel auto
+iwconfig eth2 essid r080
+iwconfig
+iptables -t nat -A POSTROUTING -j MASQUERADE
+echo 1 > /proc/sys/net/ipv4/ip_forward
+ping 10.0.0.2 > /dev/null&

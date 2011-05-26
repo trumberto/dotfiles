@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# 26.11.2006
+# remotely set irssi online
+
+~/bin/irssi-cmd.pl "/away"

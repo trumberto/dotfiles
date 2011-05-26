@@ -1,0 +1,16 @@
+#!/sw/bin/bash
+# Creates an ssh-agent, writes ssh agent info
+# to the file '~/.ssh-agent-info-`hostname`' and then prompts
+# user for keys.  Then any shell can use the agent
+# by sourcing the contents of ~/.ssh-agent-info-`hostname`:
+#  . ~/ssh-agent-info-`hostname`
+
+ssh_info_file=~/.ssh-agent-info-`hostname`
+ssh-agent >$ssh_info_file
+chmod 600 $ssh_info_file
+source $ssh_info_file
+for i in identity id_dsa id_rsa
+do
+    ssh-add .ssh/\$i
+    done
+    echo "Don't forget to 'source $ssh_info_file'"

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+xrandr --addmode S-video 800x600
+xrandr --output S-video --mode 800x600
+#xrandr --output S-video --set tv_standard pal
+xrandr --output LVDS --left-of S-video
+
+#FvwmCommand Restart

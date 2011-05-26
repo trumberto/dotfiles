@@ -1,0 +1,18 @@
+#!/bin/sh
+
+echo "Converting spaces to underscores..."
+for i in *.ogg; do mv "$i" `echo $i | tr ' ' '_'`; done 
+
+echo "Converting everything to lowercase..."
+for i in *.[Oo][Gg][Gg]; do mv "$i" `echo $i | tr '[A-Z]' '[a-z]'`; done
+
+echo "Decoding to wavs..."
+for i in *.ogg; do ogg123 -d wav $i -f `basename $i .mp3`.wav; done
+
+#sox track.wav -r 44100 track-new.wav resample
+
+echo "Normalizing..."
+normalize -m *.wav
+
+echo "Finally, burn the cd"
+cdrecord -driveropts=burnfree -tao speed=2 -nopad -audio *.wav

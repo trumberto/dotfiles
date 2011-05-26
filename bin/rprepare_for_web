@@ -1,0 +1,16 @@
+#!/bin/sh
+
+#22.01.2007
+# prepare images for web
+
+WEBIMAGES=web
+
+mkdir $WEBIMAGES
+cp *.[jJ][pP][gG] $WEBIMAGES/
+cd $WEBIMAGES
+rconvert_images_800
+
+for i in $(ls -1 *.[jJ][pP][gG]);
+do
+    composite  -gravity SouthEast -geometry +30+30 -compose Over ~/onyonlogo.png $i $i
+done

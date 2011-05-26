@@ -1,0 +1,11 @@
+#!/bin/sh
+
+START=`date +%c`
+STAMP=`date +%Y-%m-%d_%H-%M-%S`
+arecord -f cd -t wav | oggenc - --quality=6 -o recording_$STAMP.ogg
+PWD=pwd
+STOP=`date +%c`
+echo "Your recording $PWD/recording_$STAMP.ogg is ready."
+echo "Length"
+echo "START: $START"
+echo "STOP:- $STOP" 

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+#05.11.2006
+#rotate and rename images in the current directory
+
+jhead -autorot -n%Y_%m_%d-%H_%M_%S *.[Jj][Pp][Gg]
+#for i in $( ls -1 *.JPG); do
+#done

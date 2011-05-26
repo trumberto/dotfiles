@@ -1,0 +1,8 @@
+#!/bin/sh
+
+#12.11.2006
+#resize images to 800x...
+
+for i in $( ls -1 *.[Jj][Pp][Gg]); do
+    convert $i -resize 800x $i
+done

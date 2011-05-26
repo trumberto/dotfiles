@@ -1,0 +1,14 @@
+#!/bin/sh
+
+#05.11.2006
+#get images and process them
+
+DIR=/home/svobodovi/fotky/$(date +%Y_%m_%d)
+mkdir $DIR
+chown rs:users $DIR
+chmod ug+rwx $DIR
+cd $DIR
+gphoto2 --get-all-files --new
+rprocess_images
+chown rs:users *
+chmod ug+rw $DIR

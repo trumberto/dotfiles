@@ -1,0 +1,6 @@
+#!/bin/sh
+# 11.11.2005
+# burn everything in the current directory
+# don't use temp iso file, pipe it directly to cdrecord
+
+mkisofs -r -J * | cdrecord driveropts=burnfree -v -overburn -

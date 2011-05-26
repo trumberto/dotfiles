@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# 09.07.07 - this script was written much earlier but today I started to see
+# what's actually happening on my 'brumla' system
+
+/usr/bin/archivemail --delete --days=30 /$HOME/Maildir/.IN_list*
+/usr/bin/archivemail --delete --days=30 /$HOME/Maildir/.IN_rss*
+/usr/bin/archivemail --delete --days=10 /$HOME/Maildir/.IN_news*
+
+/bin/chown $USER:users /$HOME/Maildir/.IN_list*
+/bin/chown $USER:users /$HOME/Maildir/.IN_rss*
+/bin/chown $USER:users /$HOME/Maildir/.IN_news*
+#/usr/bin/chmod 600 /$HOME/mail/IN.list*
+#/usr/bin/chmod 600 /$HOME/mail/IN.news*

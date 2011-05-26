@@ -1,0 +1,7 @@
+#!/bin/sh
+
+BKPDIR=/tmp/backup
+
+cdrecord -blank=fast driveropts=burnfree
+
+mkisofs -rJ ${BKPDIR}/backup*.${EXT} | cdrecord driveropts=burnfree -v -overburn -

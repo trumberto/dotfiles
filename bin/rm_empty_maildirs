@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# 13.07.08 - remove empty maildirs - these usually are folders I don't receive mail to anymore
+# inspired by this thread on mutt-users: http://thread.gmane.org/gmane.mail.mutt.user/29078
+
+cd ~/Maildir
+for dir in `ls -a ~/Maildir/ | grep "\.IN_"`; do rmdir $dir/new $dir/cur $dir/tmp $dir || mkdir -p $dir/new $dir/cur $dir/tmp
+done

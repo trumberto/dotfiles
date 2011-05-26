@@ -1,0 +1,14 @@
+#!/bin/sh
+
+#13.03.2007
+#convert canon movies to divx
+
+rename AVI avi *.AVI
+
+for i in $(ls -1 *.[Aa][Vv][Ii]); do
+	for p in 1 2; do
+		mencoder $i \
+		-channels 1 -srate 11025 -oac mp3lame -lameopts mode=3:abr:br=16 \
+		-ovc lavc -lavcopts vcodec=msmpeg4v2:vbitrate=496:vpass=$p -o divx_$i
+  	done
+done

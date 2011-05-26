@@ -1,0 +1,7 @@
+#!/bin/sh
+
+#27.12.2006
+#search term given on cmd line in opera's new tab
+
+opera -newpage http://www.google.com/search?q=$1
+echo "awful.tag.viewonly(tags[1][2])" | awesome-client

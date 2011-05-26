@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# 10.01.2008
+
+sudo ifconfig eth2 down
+sudo pkill -f "ping 10.0.0.2"

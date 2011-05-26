@@ -1,0 +1,8 @@
+#!/bin/sh
+
+for i in $( ls *.[jJ][pP][gG] ); do
+	echo "Converting $i"
+	/usr/bin/convert $i -resize 800x $i
+done
+
+echo "Done."

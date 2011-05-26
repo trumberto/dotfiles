@@ -1,0 +1,9 @@
+#!/bin/sh
+PIDFILE="/var/run/irattach.pid"
+
+if [ -f $PIDFILE ]
+then
+	/etc/init.d/irda-utils stop > /dev/null
+else
+	/etc/init.d/irda-utils start > /dev/null
+fi

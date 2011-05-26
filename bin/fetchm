@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Run fetchmail if the network is up.
+# Author:   Nicholas Lativy <lativyn at dcs.gla.ac.uk>
+# Modified: 4 March 2005
+
+FETCHMAIL='/usr/bin/fetchmail'
+OPTIONS='-s'
+
+ping -c 3 netlucka.cz >/dev/null
+is_connected=$?
+
+if [ "$is_connected" -eq 0 ] ; then
+    $FETCHMAIL $OPTIONS || [ $? -eq 1 ]
+fi

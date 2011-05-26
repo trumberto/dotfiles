@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# 07.03.2007
+# setup reverse tunnel to fides.newstin.com server
+
+autossh -f -N -M 22000 -R 2200:localhost:22 i2s@fides.newstin.com

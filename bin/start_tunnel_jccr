@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# 27.11.2006
+# setup reverse tunnel to jccr router
+
+autossh -f -N -M 22000 -R 2200:localhost:22 root@193.165.9.30

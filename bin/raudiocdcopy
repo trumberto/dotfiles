@@ -1,0 +1,17 @@
+#!/bin/sh
+
+echo "Put audio CD into your drive and press any key."
+read -n1
+cdrdao read-cd --device ATA:1,0,0 audiocd.toc
+echo "CD copied to disk."
+
+echo "Performing cddb lookup."
+cdrdao read-cddb --device ATA:1,0,0 audiocd.toc
+echo "Cddb lookup done."
+
+echo "Remove CD from the drive and load the empty one, press any key then."
+eject /dev/cdroms/cdrom
+read -n1
+cdrdao write --device ATA:1,0,0 --speed 1 audiocd.toc
+eject /dev/cdroms/cdrom
+echo "Done."

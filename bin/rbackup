@@ -1,0 +1,14 @@
+#!/bin/sh
+
+BKPDIR=/media/usbdrive/backup
+EXT=tar.bz2
+#EXT=tar
+
+#tar -lcf ${BKPDIR}/"backup".`date +%Y-%m-%d-%H%M`.${EXT} \
+tar -ljcf ${BKPDIR}/"backup".`date +%Y-%m-%d-%H%M`.${EXT} \
+--exclude=/var/cache --exclude=/var/lib/texmf/boot \
+/etc /root /boot /usr/local \
+/lib/modules /var/lib \
+/home/rs /home/kytka
+
+#mkisofs -rJ -o ${BKPDIR}/"backup".`date +%Y-%m-%d-%H%M`.iso ${BKPDIR}/backup*.${EXT}

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# 26.11.2006 compress irssi logs
+# remove special bitlbee stuff like blist(ings) etc...
+# keep only useful info in logs
+# then compress
+
+# 09.07.2007 moved to the new installation on my laptop
+
+# 06.09.2007 files got zero length sometimes so log was lost, this was due to
+# reading and writing to the same file at the same time, solved via temporary
+# file
+
+LOG_PATH=$HOME/.irssi/logs/
+#				|exclude *bz2  |and files created today
+FILES=$(find $LOG_PATH ! -name "*bz2" ! -path "*`date +%y-%m-%d`*" -type f -print)
+
+for f in $FILES; do
+    	mv $f $f.tmp
+	grep -v "<@root>" $f.tmp | egrep -vi "<@r080> blist" > $f
+	bzip2 $f
+	rm $f.tmp
+done

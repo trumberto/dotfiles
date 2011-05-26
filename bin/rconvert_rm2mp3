@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# 16.11.2007
+# convert real media audio files to mp3
+
+mkfifo encode
+for i in $( ls *.rm ); do
+    mplayer -quiet $i -vc null -vo null -ao pcm:fast:file=encode </dev/null & lame encode $i.mp3
+done
+rm encode
+
+echo "Done."

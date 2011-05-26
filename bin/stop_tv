@@ -1,0 +1,4 @@
+#!/bin/bash
+
+xrandr --output S-video --off
+FvwmCommand Restart

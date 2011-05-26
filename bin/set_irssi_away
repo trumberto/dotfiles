@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# 26.11.2006
+# remotely set irssi away
+# implements X aware away functionality - like gaim and others
+
+DISPLAY=":0.0"
+message="afk"
+away_file="/home/rs/.irssi/away"
+
+RESULT=`xset -display $DISPLAY q | grep "Monitor is Off"`
+
+if test -n "$RESULT"; then
+    if ! test -e "$away_file"; then
+	~/bin/irssi-cmd.pl "/away $message"
+	touch $away_file
+    fi
+else
+    if test -e "$away_file"; then
+	~/bin/irssi-cmd.pl "/away"
+	rm $away_file
+    fi
+fi

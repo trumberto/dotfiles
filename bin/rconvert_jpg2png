@@ -1,0 +1,8 @@
+#!/bin/sh
+
+for i in $( ls *.jpg ); do
+	echo "Converting $i"
+	/usr/bin/convert $i $i.png
+done
+
+echo "Done."
