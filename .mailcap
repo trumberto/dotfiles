@@ -1,0 +1,49 @@
+text/html                       ;elinks %s; nametemplate=%s.html
+text/html                       ;opera -newwindow %s; nametemplate=%s.html; test=test -n "$DISPLAY"
+text/html                       ;elinks -dump %s; nametemplate=%s.html; copiousoutput
+
+application/ms-rtf              ;unrtf --text %s | less
+application/ms-rtf              ;mutt_bgrun oowriter2 %s 2&>/dev/null; test=test -n "$DISPLAY"
+application/ms-rtf              ;unrtf --text %s; copiousoutput
+
+application/rtf                 ;unrtf --text %s | less
+application/rtf                 ;mutt_bgrun oowriter2 %s 2&>/dev/null; test=test -n "$DISPLAY"
+application/rtf                 ;unrtf --text %s; copiousoutput 
+
+text/rtf                 	;unrtf --text %s | less
+text/rtf                 	;mutt_bgrun oowriter2 %s 2&>/dev/null; test=test -n "$DISPLAY"
+text/rtf                 	;unrtf --text %s; copiousoutput 
+
+application/x-msexcel           ;xlhtml %s |  html2text | less
+application/x-msexcel           ;mutt_bgrun oocalc2 %s 2&>/dev/null; test=test -n "$DISPLAY"
+application/x-msexcel           ;xlhtml %s |  html2text; copiousoutput
+
+application/msexcel           	;xlhtml %s |  html2text | less
+application/msexcel           	;mutt_bgrun oocalc2 %s 2&>/dev/null; test=test -n "$DISPLAY"
+application/msexcel           	;xlhtml %s |  html2text; copiousoutput
+
+application/vnd.ms-excel        ;xlhtml %s |  html2text | less
+application/vnd.ms-excel        ;mutt_bgrun oocalc2 %s 2&>/dev/null; test=test -n "$DISPLAY"
+application/vnd.ms-excel        ;xlhtml %s |  html2text; copiousoutput
+
+#application/vnd.ms-powerpoint   ;ppthtml %s | w3m -T text/html
+#application/vnd.ms-powerpoint   ;mutt_guess_aos.pl %s
+application/vnd.ms-powerpoint   ;mutt_bgrun ooimpress %s 2&>/dev/null; test=test -n "$DISPLAY"
+
+image/gif                       ;opera -newwindow %s; test=test -n "$DISPLAY"
+#image/*                         ;geeqie "%s" 2&>/dev/null; test=test -n "$DISPLAY"
+image/*                         ;geeqie %s
+
+application/msword              ;antiword -w72 %s | less
+application/msword              ;mutt_bgrun oowriter2 %s 2&>/dev/null; test=test -n "$DISPLAY"
+application/msword              ;antiword %s ; copiousoutput
+
+application/pdf                 ;mutt_bgrun evince -f "%s" 2&>/dev/null; test=test -n "$DISPLAY"
+application/pdf                 ;pdftotext -layout %s -; copiousoutput
+application/postscript		;ps2ascii %s; copiousoutput
+#application/octet-stream        ;mutt_guess_aos.pl %s
+
+audio/x-scpls                   ;mocp_shoutcast.sh %s
+
+video/*				;mutt_bgrun mplayer %s 2&>/dev/null; test=test -n "$DISPLAY"
+video/*				;mutt_bgrun mplayer -vo caca %s 2&>/dev/null; copiousoutput 

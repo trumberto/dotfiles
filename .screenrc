@@ -1,0 +1,35 @@
+# http://guckes.net/screen
+
+#startup_message on
+#escape "^Ww"
+defscrollback 20000
+ignorecase yes
+#try this caption
+#caption always '%{= by}%{+b y}%w %{+b}%{-b}  %{+b g}%1`%=%{+b r}%2`  %{+b w}%c:%s %{+b c} %m/%d/%y'
+#caption always '%{= bw}%-w%{+b y}%n%f %t%{-b w}%+w %{+b}%{-b}  %{+b g}%1`%=%{+b r}%2`  %{+b w}%c:%s %{+b c} %m/%d/%y %{-b w} %l'
+caption always "%{= bw}%{-b w}%?%-Lw%?%{+b y}%n*%f %t%?(%u)%?%{-b w}%?%+Lw%? %1`%=%2` %c:%s %m/%d/%y %l"
+#caption always '%{= By}%{+b y}VT%n  %{+b}||%{-b}  %{= by}%{+b y}%w %{+b}||%{-b}  %{+b g}%1`%=%{+b r}%2`  %{+b w}%C:%s %A  %{+b c}%D %m/%d/%y'
+#caption always " | %-w%{= BW}%50>%n %t%{-}%+w |%<"
+#caption always "%{kG}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{kG}%?%+Lw%?"
+#hardstatus alwayslastline "%{BW}www.guckes.net/screen/%50=%{RY}host: %H %85=%{YR}%M%d %92=%{Gb}%c%="
+#activity "%C -> %n%f %t activity!"
+#bell "%C -> %n%f %t bell!~"
+bell_msg "bell: %n (%t) [%w:%s]^G"
+msgwait 0
+
+# Use the function keys F7 and F8
+# to cycle backwards/forwards in
+# the list of existing windows:
+#bindkey -k k7 prev
+#bindkey -k k8 next
+bind ^b eval "hardcopy /tmp/screendump" "exec urlview /tmp/screendump"
+#bindkey -k kP copy # when I press PgUp I get straightly to copy mode
+
+screen -t im irssi
+screen -t mail mutt
+screen -t web elinks http:/onyon.net/
+screen -t tvo vim /home/rs/my.otl 
+screen -t moc mocp 
+screen -t shell
+screen -t shell
+screen -t shell
