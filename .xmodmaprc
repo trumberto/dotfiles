@@ -1,10 +1,4 @@
-!Caps Lock as Escape (nice for Vim)
-!remove Lock = Caps_Lock
-!keysym Caps_Lock = Escape 
-
-clear lock
-remove Lock = Caps_Lock
-keysym Caps_Lock = Super_L
+!keysym XF86Back = Super_L
 
 keycode 77 = Num_Lock
 

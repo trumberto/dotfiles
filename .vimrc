@@ -1,16 +1,20 @@
-set autoindent autowrite showmatch wrapmargin=0 report=1 ruler
+let mapleader=","
+set autoindent 
+set autowrite 
+set showmatch 
+set wrapmargin=0 
+set report=1 
+set ruler
 "syntax highlighting
 syn on
 ""backspace?
 "set bs=2
 set sm
-"set softtabstop=4
+set softtabstop=4
 "set tabstop=4
 set shiftwidth=4
 set expandtab
-let maplocalleader = ","
 set wmh=0
-set showmatch
 set showcmd
 "set cindent
 "highlight searched pattern
@@ -18,48 +22,6 @@ set hls
 "incremental search
 set incsearch
 set smartcase
-"Shift-Insert works like in terminal
-"map <S-Insert> <MiddleMouse>
-"map! <S-Insert> <MiddleMouse>
-"
-map <F9> :w!<CR>:!aspell -e -c %<CR>:e %<CR>
-
-"try this, should be quicker to move between splits
-map <C-J> <C-W>j<C-W>_ 
-map <C-K> <C-W>k<C-W>_
-
-" if I press gf on filename, new file is open in split...
-map gf :new <cfile><CR>
-
-" to be able to browse man pages in vim
-runtime ftplugin/man.vim
-
-"colorscheme elflord
-set background=dark
-"let g:solarized_termcolors=256
-colorscheme solarized
-
-" spell checking setup
-" let spell_auto_type = "mail,otl"
-
-augroup csyntax
-    autocmd!
-    autocmd BufNewFile,BufNew,BufRead *.cpp,*.c syn region myFold start="{" end="}" transparent fold
-    autocmd BufNewFile,BufNew,BufRead *.cpp,*.c syn sync fromstart
-    autocmd BufNewFile,BufNew,BufRead *.cpp,*.c set foldmethod=syntax
-augroup END
-
-" allow me quit man pages with 'q' as in standard man browser
-autocmd FileType man map q :q<CR> 
-
-" plugin loading
-filetype plugin on
-filetype indent on
-
-" this tip is from here: http://dev.gentoo.org/~ciaranm/docs/vim-guide/
-"set list
-"set listchars=tab:>-,trail:.,extends:>
-
 set laststatus=2
 set statusline=
 set statusline+=%-3.3n\                      " buffer number
@@ -74,38 +36,61 @@ set statusline+=%<%P                         " file position
 set wildmenu
 set wildignore=*.o,*.obj,*.class,*~
 
-:runtime! macros/matchit.vim
- 
-" end of tip
+set completeopt=menuone,longest,preview
 
-hi mailHeaderKey  ctermfg=darkyellow
-hi mailSubject    ctermfg=darkyellow
-hi mailHeader     ctermfg=darkyellow
-hi mailEmail      ctermfg=yellow
-hi mailSignature  ctermfg=darkmagenta
-hi mailQuoted1    ctermfg=darkcyan
-hi mailQuoted2    ctermfg=darkgreen
-hi mailQuoted3    ctermfg=darkmagenta
-hi mailQuoted4    ctermfg=darkred
-hi mailQuoted5    ctermfg=darkyellow
-hi mailQuoted6    ctermfg=white
+map <F9> :w!<CR>:!aspell -e -c %<CR>:e %<CR>
+"try this, should be quicker to move between splits
+map <C-J> <C-W>j 
+map <C-K> <C-W>k
+map <C-H> <C-W>h
+map <C-L> <C-W>l
 
-" vim sets encoding to utf8 no matter what
-" this overrides the default
-"set fileencodings=iso-8859-2
-"set fenc=iso-8859-2
-"set enc=iso-8859-2
-"set tenc=iso-8859-2
+" if I press gf on filename, new file is open in split...
+map gf :new <cfile><CR>
 
-"http://www.vim.org/tips/tip.php?tip_id=1126
-"let &titlestring = hostname() . "[vim(" . expand("%:t") . ")]" 
-"set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)\ -\ %{v:servername}
+" to be able to browse man pages in vim
+runtime ftplugin/man.vim
+runtime! macros/matchit.vim
 
-"if &term == "screen" 
-"  set t_ts=k 
-"  set t_fs=\ 
-"endif 
+augroup csyntax
+    autocmd!
+    autocmd BufNewFile,BufNew,BufRead *.cpp,*.c syn region myFold start="{" end="}" transparent fold
+    autocmd BufNewFile,BufNew,BufRead *.cpp,*.c syn sync fromstart
+    autocmd BufNewFile,BufNew,BufRead *.cpp,*.c set foldmethod=syntax
+augroup END
 
-"if &term == "screen" || &term == "xterm" 
-"  set title 
-"endif
+augroup python
+    autocmd!
+    autocmd FileType python set omnifunc=pythoncomplete#Complete
+    autocmd Filetype python set foldmethod=indent    
+    autocmd Filetype python set foldlevel=0    
+    " START pydoc plugin setup
+    "au FileType python,man map <buffer> <leader>pw :call ShowPyDoc('<C-R><C-W>', 1)<CR>
+    au FileType python,man map <buffer> <leader>pw :let save_isk = &iskeyword \|
+        \ set iskeyword+=. \|
+        \ call ShowPyDoc('<C-R><C-W>', 1)<CR> \|
+        \ let &iskeyword = save_isk<CR>
+    au FileType python,man map <buffer> <leader>pW :call ShowPyDoc('<C-R><C-A>', 1)<CR>
+    au FileType python,man map <buffer> <leader>pk :call ShowPyDoc('<C-R><C-W>', 0)<CR>
+    au FileType python,man map <buffer> <leader>pK :call ShowPyDoc('<C-R><C-A>', 0)<CR>
+    " END pydoc plugin setup
+augroup END
+
+let g:SuperTabDefaultCompletionType = "context"
+
+" allow me quit man pages with 'q' as in standard man browser
+autocmd FileType man map q :q<CR>
+autocmd FileType man set foldlevel=99
+
+" close all folds on start
+autocmd FileType vo_base set foldlevel=0
+
+" plugin loading
+filetype off
+call pathogen#infect()
+call pathogen#runtime_append_all_bundles()
+filetype plugin indent on
+
+set background=dark
+colorscheme solarized
+"colorscheme elflord
