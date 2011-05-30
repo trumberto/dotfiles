@@ -1,0 +1,28 @@
+!xterm*font:		-misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso10646-1
+!xterm*faceName:     andale:size=12
+xterm*scrollBar:	no
+xterm*loginShell:	true
+
+URxvt*font:         -misc-fixed-medium-r-*-*-14-*-*-*-*-*-iso8859-2
+!URxvt*font:         xft:Inconsolata:pixelsize=12:antialias=true:autohint=true:hinting=true
+!URxvt*font:                  xft:Monospace:pixelsize=12
+!URxvt.font:                  xft:Bitstream Vera Sans Mono:pixelsize=12
+!URxvt*font:                 xft:matto:antialias=true:size=10
+!URxvt*font:                  xft:Terminus:pixelsize=10
+URxvt*saveLines:        8000
+URxvt*loginShell:	true
+!URxvt*background:	#002b36
+!URxvt*background:	black
+!URxvt*foreground:	white
+URxvt*scrollBar:    false	
+URxvt*fading:    50	
+URxvt*cursorBlink:    true	
+URxvt*perl-ext-common:    default,matcher
+URxvt*urlLauncher:    /home/rs/bin/opera_start_new_tab
+
+URxvt.perl-lib: /home/rs/.urxvt
+URxvt.keysym.M-u: perl:mark-yank-urls:activate_mark_mode
+URxvt.perl-ext: mark-yank-urls
+
+
+Xcursor.size: 24
