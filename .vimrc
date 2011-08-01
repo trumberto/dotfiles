@@ -36,6 +36,8 @@ set statusline+=%<%P                         " file position
 set wildmenu
 set wildignore=*.o,*.obj,*.class,*~
 
+set matchpairs=(:),[:],{:},<:>
+
 set completeopt=menuone,longest,preview
 
 map <F9> :w!<CR>:!aspell -e -c %<CR>:e %<CR>

@@ -4,6 +4,9 @@ xterm*scrollBar:	no
 xterm*loginShell:	true
 
 URxvt*font:         -misc-fixed-medium-r-*-*-14-*-*-*-*-*-iso8859-2
+URxvt.keysym.C-0:     command:\033]710;-misc-fixed-medium-r-*-*-14-*-*-*-*-*-iso8859-2\007
+URxvt.keysym.C-1:     command:\033]710;xft:Monospace-8:minspace=true\007
+!URxvt*font:          xft:Monospace:pixelsize=11:antialias=true:autohint=true:hinting=true
 !URxvt*font:         xft:Inconsolata:pixelsize=12:antialias=true:autohint=true:hinting=true
 !URxvt*font:                  xft:Monospace:pixelsize=12
 !URxvt.font:                  xft:Bitstream Vera Sans Mono:pixelsize=12
@@ -19,6 +22,7 @@ URxvt*fading:    50
 URxvt*cursorBlink:    true	
 URxvt*perl-ext-common:    default,matcher
 URxvt*urlLauncher:    /home/rs/bin/opera_start_new_tab
+URxvt.urgentOnBell:  true
 
 URxvt.perl-lib: /home/rs/.urxvt
 URxvt.keysym.M-u: perl:mark-yank-urls:activate_mark_mode

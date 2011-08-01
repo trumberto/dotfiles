@@ -6,6 +6,7 @@ xset m 0/1 10&
 xset r rate 450 40&
 xset b off&
 xmodmap ~/.xmodmaprc&
+syndaemon -d
 setxkbmap -option caps:super
 killall xbindkeys && xbindkeys &
 exec ck-launch-session awesome
