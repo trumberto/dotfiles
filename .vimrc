@@ -1,3 +1,6 @@
+set nocompatible
+filetype plugin on
+filetype detect
 let mapleader=","
 set autoindent 
 set autowrite 
@@ -34,6 +37,7 @@ set statusline+=%-14(%l,%c%V%)               " line, character
 set statusline+=%<%P                         " file position
 
 set wildmenu
+set wildmode=longest,list:longest,list:full
 set wildignore=*.o,*.obj,*.class,*~
 
 set matchpairs=(:),[:],{:},<:>
@@ -49,10 +53,6 @@ map <C-L> <C-W>l
 
 " if I press gf on filename, new file is open in split...
 map gf :new <cfile><CR>
-
-" to be able to browse man pages in vim
-runtime ftplugin/man.vim
-runtime! macros/matchit.vim
 
 augroup csyntax
     autocmd!

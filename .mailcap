@@ -31,14 +31,14 @@ application/vnd.ms-excel        ;xlhtml %s |  html2text; copiousoutput
 application/vnd.ms-powerpoint   ;mutt_bgrun ooimpress %s 2&>/dev/null; test=test -n "$DISPLAY"
 
 image/gif                       ;opera -newwindow %s; test=test -n "$DISPLAY"
-#image/*                         ;geeqie "%s" 2&>/dev/null; test=test -n "$DISPLAY"
-image/*                         ;geeqie %s
+image/*                         ;mutt_bgrun geeqie -t %s ; test=test -n "$DISPLAY"
+image/*                         ;img2txt %s ; copiousoutput
 
 application/msword              ;antiword -w72 %s | less
 application/msword              ;mutt_bgrun oowriter2 %s 2&>/dev/null; test=test -n "$DISPLAY"
 application/msword              ;antiword %s ; copiousoutput
 
-application/pdf                 ;mutt_bgrun evince -f "%s" 2&>/dev/null; test=test -n "$DISPLAY"
+application/pdf                 ;mutt_bgrun epdfview "%s"; test=test -n "$DISPLAY"
 application/pdf                 ;pdftotext -layout %s -; copiousoutput
 application/postscript		;ps2ascii %s; copiousoutput
 #application/octet-stream        ;mutt_guess_aos.pl %s

@@ -3,4 +3,9 @@
 # 04.07.2007
 # setup reverse tunnel to uran.newstin.com server
 
-autossh -f -N -M 22000 -R 2200:localhost:22 i2s@uran.newstin.com
+#autossh -f -N -M 22000 -R 2200:localhost:22 i2s@uran.newstin.com
+
+# 19.08.2011
+# setup tunnel to uran
+
+autossh -f -N -M 22000 -L 2200:localhost:2200 uran
