@@ -1,5 +1,5 @@
 #setxkbmap -layout "us,cz" -option "grp:alt_shift_toggle,grp_led:scroll"
-wicd-client &
+wicd-gtk --tray &
 ~/bin/set_monitors
 urxvtd -q -f
 (xrdb -merge .Xdefaults.solarized; urxvtc)

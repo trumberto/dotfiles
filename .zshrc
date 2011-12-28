@@ -33,6 +33,8 @@ export LANG=en_US.UTF-8
 export SVN_SSH="ssh -l rsv"
 export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
+export http_proxy=http://127.0.0.1:8118
+export https_proxy=http://127.0.0.1:8118
 
 alias eclipse='GTK2_RC_FILES=/home/rs/.gtkrc-eclipse /home/rs/opt/eclipse/eclipse&!'
 alias aa="rsync -z -e ssh alice:/data/www/AdminApp.jar ~/opt/admin-app/AdminApp.jar && java -jar ~/opt/admin-app/AdminApp.jar &!"

@@ -5,3 +5,4 @@ alias ll ls -lart
 alias edit source -e ~/.lftp/edit.sh
 
 set ftp:sync-mode on
+set ssl:verify-certificate no

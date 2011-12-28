@@ -14,17 +14,17 @@ text/rtf                 	;unrtf --text %s | less
 text/rtf                 	;mutt_bgrun oowriter2 %s 2&>/dev/null; test=test -n "$DISPLAY"
 text/rtf                 	;unrtf --text %s; copiousoutput 
 
-application/x-msexcel           ;xlhtml %s |  html2text | less
+application/x-msexcel           ;xlhtml -te %s |  w3m -dump -T text/html | less
 application/x-msexcel           ;mutt_bgrun oocalc2 %s 2&>/dev/null; test=test -n "$DISPLAY"
-application/x-msexcel           ;xlhtml %s |  html2text; copiousoutput
+application/x-msexcel           ;xlhtml -te %s |  w3m -dump -T text/html; copiousoutput
 
-application/msexcel           	;xlhtml %s |  html2text | less
+application/msexcel           	;xlhtml -te %s |  w3m -dump -T text/html | less
 application/msexcel           	;mutt_bgrun oocalc2 %s 2&>/dev/null; test=test -n "$DISPLAY"
-application/msexcel           	;xlhtml %s |  html2text; copiousoutput
+application/msexcel           	;xlhtml -te %s |  w3m -dump -T text/html; copiousoutput
 
-application/vnd.ms-excel        ;xlhtml %s |  html2text | less
+application/vnd.ms-excel        ;xlhtml -te %s |  w3m -dump -T text/html | less
 application/vnd.ms-excel        ;mutt_bgrun oocalc2 %s 2&>/dev/null; test=test -n "$DISPLAY"
-application/vnd.ms-excel        ;xlhtml %s |  html2text; copiousoutput
+application/vnd.ms-excel        ;xlhtml -te %s |  w3m -dump -T text/html; copiousoutput
 
 #application/vnd.ms-powerpoint   ;ppthtml %s | w3m -T text/html
 #application/vnd.ms-powerpoint   ;mutt_guess_aos.pl %s
